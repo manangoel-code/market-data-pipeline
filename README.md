@@ -1,8 +1,7 @@
 # Market data pipeline
 
 A batch pipeline for 27 months of public 1-minute market data from Binance (5 symbols, July 2024 to September 2026). It
-checks every file and row, stores clean Parquet, and tests whether simple signals beat trading costs. To see the results,
-open `results/dashboard.html` in a browser.
+checks every file and row, stores clean Parquet, and tests whether simple signals beat trading costs. [See the results page](https://manangoel-code.github.io/market-data-pipeline/results/dashboard.html).
 
 ## What it does
 
