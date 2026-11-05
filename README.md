@@ -19,7 +19,7 @@ open `results/dashboard.html` in a browser.
 All 4,110 files matched their checksums, and all 5,918,400 rows passed every rule with no minute missing. The archive does
 change timestamps from milliseconds to microseconds on 1 January 2025, so the pipeline converts both to one unit.
 
-With no real errors to find, I tested the rules by adding damage on purpose. They fully caught 11 of 13 fault types. Two
+With no real errors to find, the rules were tested by adding damage on purpose. They fully caught 11 of 13 fault types. Two
 got through: all prices 2% too high, and volume 10 times too high. A wrong value that stays internally consistent passes
 every row rule, and catching it would need a second data source.
 
