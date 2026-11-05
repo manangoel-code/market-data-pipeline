@@ -1,0 +1,943 @@
+{
+ "rows": [
+  {
+   "symbol": "BNBUSDT",
+   "raw_rows": 1183680,
+   "clean_rows": 1183680,
+   "exact_duplicates": 0,
+   "quarantined_rows": 0,
+   "microsecond_rows": 918720,
+   "millisecond_rows": 264960
+  },
+  {
+   "symbol": "BTCUSDT",
+   "raw_rows": 1183680,
+   "clean_rows": 1183680,
+   "exact_duplicates": 0,
+   "quarantined_rows": 0,
+   "microsecond_rows": 918720,
+   "millisecond_rows": 264960
+  },
+  {
+   "symbol": "ETHUSDT",
+   "raw_rows": 1183680,
+   "clean_rows": 1183680,
+   "exact_duplicates": 0,
+   "quarantined_rows": 0,
+   "microsecond_rows": 918720,
+   "millisecond_rows": 264960
+  },
+  {
+   "symbol": "SOLUSDT",
+   "raw_rows": 1183680,
+   "clean_rows": 1183680,
+   "exact_duplicates": 0,
+   "quarantined_rows": 0,
+   "microsecond_rows": 918720,
+   "millisecond_rows": 264960
+  },
+  {
+   "symbol": "XRPUSDT",
+   "raw_rows": 1183680,
+   "clean_rows": 1183680,
+   "exact_duplicates": 0,
+   "quarantined_rows": 0,
+   "microsecond_rows": 918720,
+   "millisecond_rows": 264960
+  }
+ ],
+ "quarantine_reasons": [],
+ "completeness": [
+  {
+   "symbol": "BNBUSDT",
+   "month": "2024-07",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "BNBUSDT",
+   "month": "2024-08",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "BNBUSDT",
+   "month": "2024-09",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "BNBUSDT",
+   "month": "2024-10",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "BNBUSDT",
+   "month": "2024-11",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "BNBUSDT",
+   "month": "2024-12",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "BNBUSDT",
+   "month": "2025-01",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "BNBUSDT",
+   "month": "2025-02",
+   "expected": 40320,
+   "present": 40320
+  },
+  {
+   "symbol": "BNBUSDT",
+   "month": "2025-03",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "BNBUSDT",
+   "month": "2025-04",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "BNBUSDT",
+   "month": "2025-05",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "BNBUSDT",
+   "month": "2025-06",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "BNBUSDT",
+   "month": "2025-07",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "BNBUSDT",
+   "month": "2025-08",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "BNBUSDT",
+   "month": "2025-09",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "BNBUSDT",
+   "month": "2025-10",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "BNBUSDT",
+   "month": "2025-11",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "BNBUSDT",
+   "month": "2025-12",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "BNBUSDT",
+   "month": "2026-01",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "BNBUSDT",
+   "month": "2026-02",
+   "expected": 40320,
+   "present": 40320
+  },
+  {
+   "symbol": "BNBUSDT",
+   "month": "2026-03",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "BNBUSDT",
+   "month": "2026-04",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "BNBUSDT",
+   "month": "2026-05",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "BNBUSDT",
+   "month": "2026-06",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "BNBUSDT",
+   "month": "2026-07",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "BNBUSDT",
+   "month": "2026-08",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "BNBUSDT",
+   "month": "2026-09",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "BTCUSDT",
+   "month": "2024-07",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "BTCUSDT",
+   "month": "2024-08",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "BTCUSDT",
+   "month": "2024-09",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "BTCUSDT",
+   "month": "2024-10",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "BTCUSDT",
+   "month": "2024-11",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "BTCUSDT",
+   "month": "2024-12",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "BTCUSDT",
+   "month": "2025-01",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "BTCUSDT",
+   "month": "2025-02",
+   "expected": 40320,
+   "present": 40320
+  },
+  {
+   "symbol": "BTCUSDT",
+   "month": "2025-03",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "BTCUSDT",
+   "month": "2025-04",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "BTCUSDT",
+   "month": "2025-05",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "BTCUSDT",
+   "month": "2025-06",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "BTCUSDT",
+   "month": "2025-07",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "BTCUSDT",
+   "month": "2025-08",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "BTCUSDT",
+   "month": "2025-09",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "BTCUSDT",
+   "month": "2025-10",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "BTCUSDT",
+   "month": "2025-11",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "BTCUSDT",
+   "month": "2025-12",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "BTCUSDT",
+   "month": "2026-01",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "BTCUSDT",
+   "month": "2026-02",
+   "expected": 40320,
+   "present": 40320
+  },
+  {
+   "symbol": "BTCUSDT",
+   "month": "2026-03",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "BTCUSDT",
+   "month": "2026-04",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "BTCUSDT",
+   "month": "2026-05",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "BTCUSDT",
+   "month": "2026-06",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "BTCUSDT",
+   "month": "2026-07",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "BTCUSDT",
+   "month": "2026-08",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "BTCUSDT",
+   "month": "2026-09",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "ETHUSDT",
+   "month": "2024-07",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "ETHUSDT",
+   "month": "2024-08",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "ETHUSDT",
+   "month": "2024-09",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "ETHUSDT",
+   "month": "2024-10",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "ETHUSDT",
+   "month": "2024-11",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "ETHUSDT",
+   "month": "2024-12",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "ETHUSDT",
+   "month": "2025-01",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "ETHUSDT",
+   "month": "2025-02",
+   "expected": 40320,
+   "present": 40320
+  },
+  {
+   "symbol": "ETHUSDT",
+   "month": "2025-03",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "ETHUSDT",
+   "month": "2025-04",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "ETHUSDT",
+   "month": "2025-05",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "ETHUSDT",
+   "month": "2025-06",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "ETHUSDT",
+   "month": "2025-07",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "ETHUSDT",
+   "month": "2025-08",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "ETHUSDT",
+   "month": "2025-09",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "ETHUSDT",
+   "month": "2025-10",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "ETHUSDT",
+   "month": "2025-11",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "ETHUSDT",
+   "month": "2025-12",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "ETHUSDT",
+   "month": "2026-01",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "ETHUSDT",
+   "month": "2026-02",
+   "expected": 40320,
+   "present": 40320
+  },
+  {
+   "symbol": "ETHUSDT",
+   "month": "2026-03",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "ETHUSDT",
+   "month": "2026-04",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "ETHUSDT",
+   "month": "2026-05",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "ETHUSDT",
+   "month": "2026-06",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "ETHUSDT",
+   "month": "2026-07",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "ETHUSDT",
+   "month": "2026-08",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "ETHUSDT",
+   "month": "2026-09",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "SOLUSDT",
+   "month": "2024-07",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "SOLUSDT",
+   "month": "2024-08",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "SOLUSDT",
+   "month": "2024-09",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "SOLUSDT",
+   "month": "2024-10",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "SOLUSDT",
+   "month": "2024-11",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "SOLUSDT",
+   "month": "2024-12",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "SOLUSDT",
+   "month": "2025-01",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "SOLUSDT",
+   "month": "2025-02",
+   "expected": 40320,
+   "present": 40320
+  },
+  {
+   "symbol": "SOLUSDT",
+   "month": "2025-03",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "SOLUSDT",
+   "month": "2025-04",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "SOLUSDT",
+   "month": "2025-05",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "SOLUSDT",
+   "month": "2025-06",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "SOLUSDT",
+   "month": "2025-07",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "SOLUSDT",
+   "month": "2025-08",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "SOLUSDT",
+   "month": "2025-09",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "SOLUSDT",
+   "month": "2025-10",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "SOLUSDT",
+   "month": "2025-11",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "SOLUSDT",
+   "month": "2025-12",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "SOLUSDT",
+   "month": "2026-01",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "SOLUSDT",
+   "month": "2026-02",
+   "expected": 40320,
+   "present": 40320
+  },
+  {
+   "symbol": "SOLUSDT",
+   "month": "2026-03",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "SOLUSDT",
+   "month": "2026-04",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "SOLUSDT",
+   "month": "2026-05",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "SOLUSDT",
+   "month": "2026-06",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "SOLUSDT",
+   "month": "2026-07",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "SOLUSDT",
+   "month": "2026-08",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "SOLUSDT",
+   "month": "2026-09",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "XRPUSDT",
+   "month": "2024-07",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "XRPUSDT",
+   "month": "2024-08",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "XRPUSDT",
+   "month": "2024-09",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "XRPUSDT",
+   "month": "2024-10",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "XRPUSDT",
+   "month": "2024-11",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "XRPUSDT",
+   "month": "2024-12",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "XRPUSDT",
+   "month": "2025-01",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "XRPUSDT",
+   "month": "2025-02",
+   "expected": 40320,
+   "present": 40320
+  },
+  {
+   "symbol": "XRPUSDT",
+   "month": "2025-03",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "XRPUSDT",
+   "month": "2025-04",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "XRPUSDT",
+   "month": "2025-05",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "XRPUSDT",
+   "month": "2025-06",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "XRPUSDT",
+   "month": "2025-07",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "XRPUSDT",
+   "month": "2025-08",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "XRPUSDT",
+   "month": "2025-09",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "XRPUSDT",
+   "month": "2025-10",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "XRPUSDT",
+   "month": "2025-11",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "XRPUSDT",
+   "month": "2025-12",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "XRPUSDT",
+   "month": "2026-01",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "XRPUSDT",
+   "month": "2026-02",
+   "expected": 40320,
+   "present": 40320
+  },
+  {
+   "symbol": "XRPUSDT",
+   "month": "2026-03",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "XRPUSDT",
+   "month": "2026-04",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "XRPUSDT",
+   "month": "2026-05",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "XRPUSDT",
+   "month": "2026-06",
+   "expected": 43200,
+   "present": 43200
+  },
+  {
+   "symbol": "XRPUSDT",
+   "month": "2026-07",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "XRPUSDT",
+   "month": "2026-08",
+   "expected": 44640,
+   "present": 44640
+  },
+  {
+   "symbol": "XRPUSDT",
+   "month": "2026-09",
+   "expected": 43200,
+   "present": 43200
+  }
+ ],
+ "gap_summary": [],
+ "longest_gaps": [],
+ "flags": [
+  {
+   "symbol": "BNBUSDT",
+   "zero_volume_minutes": 0,
+   "moves_over_5_percent": 6
+  },
+  {
+   "symbol": "BTCUSDT",
+   "zero_volume_minutes": 0,
+   "moves_over_5_percent": 0
+  },
+  {
+   "symbol": "ETHUSDT",
+   "zero_volume_minutes": 0,
+   "moves_over_5_percent": 3
+  },
+  {
+   "symbol": "SOLUSDT",
+   "zero_volume_minutes": 0,
+   "moves_over_5_percent": 1
+  },
+  {
+   "symbol": "XRPUSDT",
+   "zero_volume_minutes": 0,
+   "moves_over_5_percent": 12
+  }
+ ],
+ "largest_moves": [
+  {
+   "symbol": "XRPUSDT",
+   "minute": "2025-10-10 21:20",
+   "percent": -21.98
+  },
+  {
+   "symbol": "XRPUSDT",
+   "minute": "2025-10-10 21:21",
+   "percent": 18.06
+  },
+  {
+   "symbol": "XRPUSDT",
+   "minute": "2025-10-10 21:19",
+   "percent": -11.43
+  },
+  {
+   "symbol": "ETHUSDT",
+   "minute": "2025-02-03 02:07",
+   "percent": -9.59
+  },
+  {
+   "symbol": "XRPUSDT",
+   "minute": "2025-10-10 21:23",
+   "percent": 8.85
+  },
+  {
+   "symbol": "ETHUSDT",
+   "minute": "2024-08-05 01:10",
+   "percent": -8.4
+  },
+  {
+   "symbol": "BNBUSDT",
+   "minute": "2025-10-10 21:16",
+   "percent": -7.97
+  },
+  {
+   "symbol": "XRPUSDT",
+   "minute": "2025-10-10 21:18",
+   "percent": -7.76
+  },
+  {
+   "symbol": "BNBUSDT",
+   "minute": "2025-10-10 21:21",
+   "percent": 7.52
+  },
+  {
+   "symbol": "BNBUSDT",
+   "minute": "2025-10-10 21:19",
+   "percent": -7.05
+  }
+ ]
+}

@@ -1,0 +1,85 @@
+{
+ "symbol": "BTCUSDT",
+ "day": "2026-03-02",
+ "rows_in_day": 1440,
+ "results": [
+  {
+   "fault": "text in a number column",
+   "injected": 20,
+   "caught": 20,
+   "expected_reason": "unparsable"
+  },
+  {
+   "fault": "row cut short",
+   "injected": 20,
+   "caught": 20,
+   "expected_reason": "unparsable"
+  },
+  {
+   "fault": "timestamp off the minute",
+   "injected": 20,
+   "caught": 20,
+   "expected_reason": "not_on_minute_boundary"
+  },
+  {
+   "fault": "row from another day",
+   "injected": 20,
+   "caught": 20,
+   "expected_reason": "outside_file_date"
+  },
+  {
+   "fault": "zero price",
+   "injected": 20,
+   "caught": 20,
+   "expected_reason": "non_positive_price"
+  },
+  {
+   "fault": "high below close",
+   "injected": 20,
+   "caught": 20,
+   "expected_reason": "ohlc_inconsistent"
+  },
+  {
+   "fault": "negative volume",
+   "injected": 20,
+   "caught": 20,
+   "expected_reason": "negative_volume"
+  },
+  {
+   "fault": "taker volume above total",
+   "injected": 20,
+   "caught": 20,
+   "expected_reason": "taker_exceeds_volume"
+  },
+  {
+   "fault": "all prices 2% too high",
+   "injected": 20,
+   "caught": 0,
+   "expected_reason": null
+  },
+  {
+   "fault": "volume 10 times too high",
+   "injected": 20,
+   "caught": 0,
+   "expected_reason": null
+  },
+  {
+   "fault": "exact repeat of a row",
+   "injected": 20,
+   "caught": 20,
+   "expected_reason": "exact_duplicate"
+  },
+  {
+   "fault": "two versions of one minute",
+   "injected": 20,
+   "caught": 20,
+   "expected_reason": "conflicting_duplicate"
+  },
+  {
+   "fault": "row silently dropped",
+   "injected": 20,
+   "caught": 20,
+   "expected_reason": "gap"
+  }
+ ]
+}

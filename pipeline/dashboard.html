@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Market data pipeline: results</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Roboto+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  --gap: #d3d7dc; --pane: #fff; --bar: #eef0f2; --plot: #f8f9fa; --fg: #1f1f1f; --mute: #5f6368; --line: #e0e3e7;
+  --line-strong: #80868b; --accent: #0b57d0; --miss: #c5221f; --miss-tint: #fce8e6;
+  --s1: #0b57d0; --s2: #b45309; --s3: #7b2cbf;
+  --sans: Roboto, Arial, sans-serif; --num: "Roboto Mono", Consolas, monospace;
+  color-scheme: light;
+}
+html { background: var(--pane); scrollbar-color: var(--line-strong) var(--pane); }
+::selection { background: #c2d7fa; }
+body { margin: 0; color: var(--fg); font: 13px/1.45 var(--sans); }
+a { color: var(--accent); text-underline-offset: 2px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+h1, h2, p { margin: 0; }
+h1 { font-size: 14px; font-weight: 500; }
+h2 { font-size: 12px; font-weight: 500; }
+.topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 38px; padding: 5px 10px; box-sizing: border-box; background: var(--bar); }
+.topbar p { color: var(--mute); font-size: 12px; max-width: none; }
+.topbar .source { white-space: nowrap; }
+.page { display: grid; gap: 1px; border-top: 1px solid var(--gap); border-bottom: 1px solid var(--gap); background: var(--gap); grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); grid-template-areas: "strip strip" "result result" "grid faults" "signals signals" "moves method"; }
+.pane { background: var(--pane); min-width: 0; }
+.pane-bar { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 26px; padding: 2px 10px; box-sizing: border-box; background: var(--bar); }
+.pane-bar span { color: var(--mute); font-size: 11px; }
+.body { padding: 10px; }
+.strip { grid-area: strip; }
+.strip dl { display: flex; flex-wrap: wrap; margin: 0; }
+.strip div { flex: 1 0 auto; padding: 6px 14px 7px 10px; border-left: 1px solid var(--line); }
+.strip div:first-child { border-left: 0; }
+.strip dt { color: var(--mute); font-size: 11px; white-space: nowrap; }
+.strip dd { margin: 0; font: 500 15px var(--num); white-space: nowrap; }
+.result { grid-area: result; }
+.result ol { margin: 0; padding: 10px 12px 11px 30px; display: grid; gap: 4px; font-size: 14px; max-width: 75ch; text-wrap: pretty; }
+.grid-pane { grid-area: grid; }
+.faults-pane { grid-area: faults; }
+.signals-pane { grid-area: signals; }
+.moves-pane { grid-area: moves; }
+.method-pane { grid-area: method; }
+.months { display: grid; grid-template-columns: 62px repeat(var(--months), minmax(0, 1fr)); gap: 1px 1px; font: 11px var(--num); align-items: center; }
+.months .year { color: var(--mute); grid-row: 1; white-space: nowrap; overflow: visible; }
+.months .sym { color: var(--fg); }
+.months i { display: block; height: 20px; background: var(--accent); }
+.months i.gap { background: var(--miss); }
+.months i.switch { box-shadow: inset 2px 0 var(--fg); }
+.legend { display: flex; flex-wrap: wrap; gap: 2px 16px; margin: 8px 0 12px; font-size: 12px; color: var(--mute); }
+.legend span { display: inline-flex; align-items: center; gap: 5px; }
+.legend i { width: 12px; height: 12px; display: inline-block; background: var(--accent); }
+.legend i.rule { width: 2px; background: var(--fg); }
+.legend i.swatch { width: 12px; height: 2px; margin-right: 0; vertical-align: 0; }
+.legend i.swatch.hold { background: var(--line-strong); }
+.legend[hidden] { display: none; }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 12px; }
+th, td { text-align: right; padding: 4px 6px; border-bottom: 1px solid var(--line); white-space: nowrap; font-variant-numeric: tabular-nums; }
+td:not(:first-child) { font-family: var(--num); }
+th:first-child, td:first-child { text-align: left; padding-left: 0; white-space: normal; }
+th:last-child, td:last-child { padding-right: 0; }
+th { color: var(--mute); font-weight: 400; font-size: 11px; }
+td.left, th.left { text-align: left; font-family: var(--sans); }
+td b { font-weight: 500; }
+.signal-name { white-space: nowrap; }
+.scroll:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+tr.missed td { background: var(--miss-tint); color: var(--miss); }
+.note { margin-top: 8px; color: var(--mute); font-size: 12px; max-width: 76ch; text-wrap: pretty; }
+.signal-layout { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+.chart-wrap { position: relative; }
+.chart { display: block; width: 100%; height: 280px; background: var(--plot); touch-action: pan-y; }
+.chart text { font: 11px var(--num); fill: var(--mute); }
+.chart .grid { stroke: var(--line); }
+.chart .zero { stroke: var(--line-strong); }
+.chart .curve { fill: none; stroke-width: 1.75; stroke-linejoin: round; }
+.chart .hold { stroke-width: 1.25; }
+.chart .hair { stroke: var(--line-strong); }
+.tip { position: absolute; top: 8px; pointer-events: none; background: var(--pane); border: 1px solid var(--line-strong); padding: 4px 8px; font: 11px/1.5 var(--num); white-space: nowrap; border-radius: 2px; }
+.tip[hidden] { display: none; }
+.swatch { display: inline-block; width: 12px; height: 2px; vertical-align: 3px; margin-right: 6px; }
+.method { margin: 0; padding-left: 16px; display: grid; gap: 5px; color: var(--mute); font-size: 12px; max-width: 76ch; }
+.method b { color: var(--fg); font-weight: 500; }
+@media (max-width: 900px) {
+  .page { grid-template-columns: minmax(0, 1fr); grid-template-areas: "strip" "result" "grid" "faults" "signals" "moves" "method"; }
+  .signal-layout { grid-template-columns: minmax(0, 1fr); }
+  .strip div { flex: 1 0 40%; border-left: 0; padding: 4px 10px; }
+  .result ol { font-size: 13px; }
+  .topbar { flex-wrap: wrap; }
+  .chart { height: 220px; }
+}
+</style>
+
+<header class="topbar">
+  <div>
+    <h1>Market data pipeline</h1>
+    <p>Downloads public market data, verifies checksums, quarantines bad rows, stores clean Parquet, and tests 3 signals against trading costs.</p>
+  </div>
+  <p class="source">Source: <a href="https://data.binance.vision/">Binance public data</a>, spot 1-minute bars</p>
+</header>
+
+<main class="page">
+  <section class="pane strip" aria-label="Run figures"><dl id="strip"></dl></section>
+
+  <section class="pane result">
+    <div class="pane-bar"><h2>Result</h2></div>
+    <ol id="findings"></ol>
+  </section>
+
+  <section class="pane grid-pane">
+    <div class="pane-bar"><h2>Data completeness by month</h2><span id="grid-range"></span></div>
+    <div class="body">
+      <div class="months" id="months" role="img"></div>
+      <div class="legend">
+        <span><i></i>All minutes present</span>
+        <span><i class="rule"></i>Timestamps change from milliseconds to microseconds</span>
+      </div>
+      <div class="scroll" id="rows"></div>
+      <p class="note" id="unit-note"></p>
+    </div>
+  </section>
+
+  <section class="pane faults-pane">
+    <div class="pane-bar"><h2>Damage added on purpose</h2><span id="faults-range"></span></div>
+    <div class="body">
+      <div class="scroll" id="faults"></div>
+      <p class="note">Each row is a separate run of the same pipeline. Red rows are blind spots: a wrong value that stays internally consistent passes every row check, and only a second data source could catch it.</p>
+    </div>
+  </section>
+
+  <section class="pane signals-pane">
+    <div class="pane-bar"><h2>Do simple signals predict the next hour?</h2><span id="signals-range"></span></div>
+    <div class="body signal-layout">
+      <div>
+        <div class="chart-wrap">
+          <svg class="chart" id="chart" role="img" aria-label="Cumulative return before costs for three signals and buy and hold. The table beside it has the summary numbers."></svg>
+          <div class="tip" id="tip" hidden></div>
+        </div>
+        <div class="legend" id="key" hidden>
+          <span><i class="swatch" style="background:var(--s1)"></i>Past 1-hour return</span>
+          <span><i class="swatch" style="background:var(--s2)"></i>Past 24-hour return</span>
+          <span><i class="swatch" style="background:var(--s3)"></i>Taker buy imbalance</span>
+          <span><i class="swatch hold"></i>Buy and hold</span>
+        </div>
+        <p class="note">Sum of hourly returns before costs, equal weight across the 5 symbols. After costs the signals fall far below this scale, so the table reports them.</p>
+      </div>
+      <div>
+        <div class="scroll" id="signals"></div>
+        <p class="note" id="signals-note"></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="pane moves-pane">
+    <div class="pane-bar"><h2>Largest 1-minute moves</h2><span>Kept and flagged, not removed</span></div>
+    <div class="body">
+      <div class="scroll" id="moves"></div>
+      <p class="note" id="moves-note"></p>
+    </div>
+  </section>
+
+  <section class="pane method-pane">
+    <div class="pane-bar"><h2>Limits</h2></div>
+    <div class="body">
+      <ul class="method" id="method"></ul>
+    </div>
+  </section>
+</main>
+
+<script>
+const DATA = /*DATA*/null;
+const $ = id => document.getElementById(id);
+const int = n => n.toLocaleString("en-GB");
+const bp = (x, d = 2) => (x >= 0 ? "+" : "−") + Math.abs(x).toFixed(d);
+const LABELS = { past_1h_return: "Past 1-hour return", past_24h_return: "Past 24-hour return", taker_buy_imbalance: "Taker buy imbalance" };
+const COLOURS = { past_1h_return: "var(--s1)", past_24h_return: "var(--s2)", taker_buy_imbalance: "var(--s3)" };
+
+function table(headers, rows, leftColumns = []) {
+  const t = document.createElement("table");
+  const head = t.createTHead().insertRow();
+  headers.forEach((h, i) => { const th = document.createElement("th"); th.textContent = h; if (leftColumns.includes(i)) th.className = "left"; head.append(th); });
+  const body = t.createTBody();
+  rows.forEach(r => { const row = body.insertRow(); r.forEach((c, i) => { const cell = row.insertCell(); if (c instanceof Node) cell.append(c); else cell.textContent = c; if (leftColumns.includes(i)) cell.className = "left"; }); });
+  return t;
+}
+
+const { ingest, quality, faults, signals } = DATA;
+const sum = (list, key) => list.reduce((total, r) => total + r[key], 0);
+const verified = (ingest.counts.cached || 0) + (ingest.counts.downloaded || 0);
+const rawRows = sum(quality.rows, "raw_rows"), cleanRows = sum(quality.rows, "clean_rows");
+const quarantined = sum(quality.rows, "quarantined_rows"), micro = sum(quality.rows, "microsecond_rows");
+const expected = sum(quality.completeness, "expected"), present = sum(quality.completeness, "present");
+const caughtTypes = faults.results.filter(r => r.caught === r.injected).length;
+const names = Object.keys(signals.signals);
+const firstMonth = quality.completeness[0].month, lastMonth = quality.completeness[quality.completeness.length - 1].month;
+
+// Strip
+[["Files verified", `${int(verified)} / ${int(ingest.files_expected)}`], ["Symbols", quality.rows.length], ["Raw rows", int(rawRows)], ["Clean rows", int(cleanRows)],
+ ["Quarantined", int(quarantined)], ["Missing minutes", int(expected - present)], ["Fault types caught", `${caughtTypes} / ${faults.results.length}`],
+ ["Signals beating costs", `${names.filter(n => signals.signals[n].net_bp_per_hour > 0).length} / ${names.length}`]]
+  .forEach(([label, value]) => { const d = document.createElement("div"); const dt = document.createElement("dt"); dt.textContent = label; const dd = document.createElement("dd"); dd.textContent = value; d.append(dt, dd); $("strip").append(d); });
+
+// Findings
+[`The archive was clean: all ${int(verified)} daily files matched their published SHA-256, and all ${int(rawRows)} rows passed every check, with no minute missing.`,
+ `The checks work on damaged data: ${caughtTypes} of ${faults.results.length} fault types were fully caught. A wrong price or volume that stays internally consistent got through.`,
+ `No signal beat costs: all ${names.length} lost money after ${signals.cost_bp_per_unit} bp per unit traded, and before costs every interval contains zero.`]
+  .forEach(text => { const li = document.createElement("li"); li.textContent = text; $("findings").append(li); });
+
+// Completeness grid: one cell per symbol and month, with a rule at the timestamp change.
+const symbols = [...new Set(quality.completeness.map(c => c.symbol))];
+const months = [...new Set(quality.completeness.map(c => c.month))];
+const grid = $("months");
+grid.style.setProperty("--months", months.length);
+grid.setAttribute("aria-label", `Data completeness for ${symbols.length} symbols over ${months.length} months: ${int(present)} of ${int(expected)} minutes present. The table below has the same totals.`);
+grid.append(document.createElement("span"));
+months.forEach((m, i) => { const y = document.createElement("span"); y.className = "year"; y.style.gridColumn = i + 2; y.textContent = (i === 0 || m.endsWith("-01")) ? m.slice(0, 4) : ""; grid.append(y); });
+symbols.forEach(symbol => {
+  const label = document.createElement("span"); label.className = "sym"; label.textContent = symbol.replace("USDT", ""); grid.append(label);
+  quality.completeness.filter(c => c.symbol === symbol).forEach(c => {
+    const cell = document.createElement("i");
+    const share = c.present / c.expected;
+    cell.className = (share < 1 ? "gap " : "") + (c.month === "2025-01" ? "switch" : "");
+    cell.title = `${symbol} ${c.month}: ${int(c.present)} of ${int(c.expected)} minutes (${(share * 100).toFixed(2)}%)`;
+    grid.append(cell);
+  });
+});
+$("grid-range").textContent = `${firstMonth} to ${lastMonth}`;
+$("rows").append(table(["Symbol", "Raw rows", "Clean", "Duplicates", "Quarantined", "Over 5% moves"],
+  quality.rows.map(r => [r.symbol, int(r.raw_rows), int(r.clean_rows), int(r.exact_duplicates), int(r.quarantined_rows), quality.flags.find(f => f.symbol === r.symbol).moves_over_5_percent])));
+$("unit-note").textContent = `The archive changes timestamps from milliseconds to microseconds on 1 Jan 2025. Read as milliseconds, ${int(micro)} rows would land tens of thousands of years in the future, so the pipeline converts both to one unit.`;
+
+// Faults
+$("faults-range").textContent = `${faults.results[0].injected} of each, into ${int(faults.rows_in_day)} real rows`;
+const FOUND_BY = { unparsable: "Unparsable row", not_on_minute_boundary: "Minute boundary", outside_file_date: "File date", non_positive_price: "Positive price",
+  ohlc_inconsistent: "Open, high, low, close", negative_volume: "Negative volume", taker_exceeds_volume: "Taker within volume", exact_duplicate: "Exact duplicate",
+  conflicting_duplicate: "Conflicting duplicate", gap: "Gap report" };
+const sentence = text => text[0].toUpperCase() + text.slice(1);
+const orderedFaults = [...faults.results].sort((a, b) => (a.caught < a.injected) - (b.caught < b.injected));
+const faultTable = table(["Fault added", "Check that found it", "Caught"], orderedFaults.map(r => {
+  return [sentence(r.fault), r.expected_reason ? FOUND_BY[r.expected_reason] : "None", `${r.caught} / ${r.injected}`];
+}), [1]);
+faultTable.querySelectorAll("tbody tr").forEach((row, i) => { if (orderedFaults[i].caught < orderedFaults[i].injected) row.className = "missed"; });
+$("faults").append(faultTable);
+
+// Signal table
+const level = (signals.confidence_level * 100).toFixed(1);
+$("signals-range").textContent = `Tested ${signals.test_period[0].slice(0, 10)} to ${signals.test_period[1].slice(0, 10)}, ${int(signals.test_hours)} hours`;
+$("signals").append(table(["Signal", "Net bp/h", `${level}% interval`, "Gross bp/h", `${level}% interval`, "Turnover/h"],
+  names.map(n => { const s = signals.signals[n];
+    const name = document.createElement("span"); const swatch = document.createElement("i"); swatch.className = "swatch"; swatch.style.background = COLOURS[n]; name.append(swatch, LABELS[n]);
+    name.className = "signal-name";
+    const net = document.createElement("b"); net.textContent = bp(s.net_bp_per_hour);
+    return [name, net, `${bp(s.net_ci_low_bp)} to ${bp(s.net_ci_high_bp)}`, bp(s.gross_bp_per_hour), `${bp(s.gross_ci_low_bp)} to ${bp(s.gross_ci_high_bp)}`, s.turnover_per_hour.toFixed(2)]; })));
+document.querySelectorAll(".scroll").forEach(box => { box.tabIndex = 0; });
+$("signals-note").textContent = `bp/h is basis points per hour, where 1 bp is 0.01%. Turnover/h is units traded per hour per symbol, so reversing a position counts as 2. Buy and hold earned ${bp(signals.buy_and_hold.bp_per_hour)} bp/h over the same period, with an annualised Sharpe ratio of ${signals.buy_and_hold.annualised_sharpe.toFixed(2)}. Each signal's direction was chosen only from earlier data, and the ${level}% intervals allow for testing ${names.length} signals.`;
+
+// Chart: one axis, direct labels at the line ends, and a crosshair with exact values.
+const series = [...names.map(n => ({ key: n, label: LABELS[n], values: signals.signals[n].gross_curve, stroke: COLOURS[n], cls: "curve" })),
+  { key: "hold", label: "Buy and hold", values: signals.buy_and_hold.curve, stroke: "var(--line-strong)", cls: "curve hold" }];
+const dates = signals.curve_dates;
+let scale = null;
+function drawChart(hover = null) {
+  const svg = $("chart"), W = svg.clientWidth, H = svg.clientHeight;
+  if (!W) return;
+  const wide = W >= 520, left = 44, right = wide ? 136 : 8, top = 10, bottom = 22, plotW = W - left - right, plotH = H - top - bottom;
+  const all = series.flatMap(s => s.values).concat(0);
+  const lo = Math.min(...all), hi = Math.max(...all);
+  const step = [0.05, 0.1, 0.2, 0.25, 0.5, 1].find(s => (hi - lo) / s <= 6) || 2;
+  const y0 = Math.floor(lo / step) * step, y1 = Math.ceil(hi / step) * step;
+  const x = i => left + i / (dates.length - 1) * plotW;
+  const y = v => top + (y1 - v) / (y1 - y0) * plotH;
+  scale = { left, plotW };
+  let out = "";
+  for (let v = y0; v <= y1 + step / 2; v += step) {
+    const rounded = Math.round(v / step) * step;
+    out += `<line class="${rounded === 0 ? "zero" : "grid"}" x1="${left}" x2="${left + plotW}" y1="${y(v)}" y2="${y(v)}"/><text x="${left - 6}" y="${y(v) + 4}" text-anchor="end">${Math.round(rounded * 100)}%</text>`;
+  }
+  dates.forEach((d, i) => { if (d.endsWith("-01-01") || d.endsWith("-07-01")) out += `<text x="${x(i)}" y="${H - 6}" text-anchor="${i < 5 ? "start" : "middle"}">${d.slice(0, 7)}</text>`; });
+  series.forEach(s => { out += `<polyline class="${s.cls}" style="stroke:${s.stroke}" points="${s.values.map((v, i) => `${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ")}"><title>${s.label}</title></polyline>`; });
+  // Direct labels, nudged apart so that neighbouring line ends stay readable.
+  const ends = series.map(s => ({ s, at: y(s.values[s.values.length - 1]) })).sort((a, b) => a.at - b.at);
+  ends.forEach((e, i) => { if (i && e.at - ends[i - 1].at < 13) e.at = ends[i - 1].at + 13; });
+  if (wide) ends.forEach(e => { out += `<text x="${left + plotW + 6}" y="${e.at + 4}" style="fill:${e.s.key === "hold" ? "var(--mute)" : e.s.stroke};font-family:var(--sans)">${e.s.label}</text>`; });
+  $("key").hidden = wide;
+  if (hover !== null) out += `<line class="hair" x1="${x(hover)}" x2="${x(hover)}" y1="${top}" y2="${top + plotH}"/>`;
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  svg.innerHTML = out;
+}
+function showTip(event) {
+  const box = $("chart").getBoundingClientRect();
+  const i = Math.max(0, Math.min(dates.length - 1, Math.round((event.clientX - box.left - scale.left) / scale.plotW * (dates.length - 1))));
+  drawChart(i);
+  const tip = $("tip");
+  tip.hidden = false;
+  tip.replaceChildren(document.createTextNode(i === dates.length - 1 ? signals.test_period[1].slice(0, 16) : dates[i]));
+  series.forEach(s => { const line = document.createElement("div"); line.textContent = `${s.label}: ${(s.values[i] * 100).toFixed(1)}%`; tip.append(line); });
+  const x = event.clientX - box.left;
+  tip.style.left = x > box.width / 2 ? `${x - tip.offsetWidth - 10}px` : `${x + 10}px`;
+}
+$("chart").addEventListener("pointermove", showTip);
+$("chart").addEventListener("pointerleave", () => { $("tip").hidden = true; drawChart(); });
+new ResizeObserver(() => drawChart()).observe($("chart"));
+
+// Largest moves
+$("moves").append(table(["Symbol", "Minute (UTC)", "Change"], quality.largest_moves.slice(0, 6).map(m => [m.symbol, m.minute, `${bp(m.percent)}%`])));
+const flash = names.map(n => signals.signals[n]);
+$("moves-note").textContent = `These pass every row check, so they stay in the data. They have not been compared with another exchange. Removing 2025-10-10 changes each signal's net result by at most ${Math.max(...flash.map(s => Math.abs(s.net_without_flash_crash_bp - s.net_bp_per_hour))).toFixed(2)} bp/h.`;
+
+// Limits
+[["Assumed costs.", `${signals.cost_bp_per_unit} bp per unit traded, based on a standard taker fee. Bid-ask spread and market impact are not included, so real results would be worse.`],
+ ["Fills.", "Every trade is assumed to fill at the hour's closing price."],
+ ["One venue and one period.", `${symbols.length} large symbols on one exchange, tested over about 21 months. This says nothing about other signals, markets or horizons.`],
+ ["Fault test.", `Faults were added to one day of ${faults.symbol} (${faults.day}), so the counts show that the rules fire. They are not an estimate of real-world error rates.`]]
+  .forEach(([head, text]) => { const li = document.createElement("li"); const b = document.createElement("b"); b.textContent = head; li.append(b, ` ${text}`); $("method").append(li); });
+</script>
